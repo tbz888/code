@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+    	<div>
+        	<pre id='coin'></pre>
+        	<pre id='front'></pre>
+        	<pre id='7days'></pre>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+    	// API: https://github.com/CoinCapDev/CoinCap.io
+    	// curl/ajax/websocket
+		function reqURL(url, element) {
+			var request = new XMLHttpRequest();
+			request.open('get', url, true);
+			request.onreadystatechange = function () {
+				if (request.readyState==4 && request.status==200) {
+						document.getElementById(element).innerHTML = url + '\n' + JSON.stringify(JSON.parse(request.responseText), null, 4);
+					}
+				else {
+					document.getElementById(element).innerHTML = url + ' request failed.';
+				}
+			}
+			request.send();
+		}
+
+		reqURL('http://coincap.io/page/BTC', 'coin');
+		reqURL('http://coincap.io/front', 'front');
+		reqURL('http://coincap.io/history/7day/BTC', '7days');
+
+    </script>
+
+</html>
+

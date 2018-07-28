@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Canvas Demo</title>
+    <link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body>
+    <canvas id="tbz" width="800" height="500"></canvas>
+    <script type="text/javascript">
+        // 纸
+        var canvas = document.getElementById('tbz');
+        // 笔
+        var context = canvas.getContext('2d');
+
+        // 墨水(绘图方式)
+        context.strokeStyle = "#FF0000"     //线
+        context.fillStyle = "#00FF00";      //填充
+
+        // rectangle
+        context.strokeRect(100, 0, 200, 300); 
+        context.fillRect(0, 100, 300, 200);
+    
+        // triangle    
+        context.beginPath();
+        context.moveTo(200,200);
+        context.lineTo(500,200);
+        context.lineTo(200,500);
+        context.lineTo(200,200);
+        context.closePath();
+        context.strokeStyle = "orange";
+        context.fillStyle = "#aabaaa"
+        context.lineWidth = 5;
+        context.stroke();
+        context.fill();
+
+        // circle
+        context.beginPath();
+        context.arc(300,300, 60, 0, Math.PI * 2);
+        context.closePath();
+        context.fillStyle = "#ee3355";
+        context.stroke();
+        context.fill();
+    </script>
+</body>
+</html>
