@@ -1,3 +1,5 @@
+package main.test;
+
 import mygame.client.Client;
 import mygame.server.Server;
 import mygame.shared.Utilities;

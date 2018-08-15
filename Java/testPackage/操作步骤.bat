@@ -6,5 +6,5 @@ javac -d . Utilities.java Client.java Server.java
 rem ´ò³Éjar°ü
 jar -cvf mygame.jar mygame
 
-javac Test.java
-java Test
+javac -d . Test.java
+java main.test.Test
