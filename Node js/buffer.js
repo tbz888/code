@@ -27,7 +27,7 @@ for (const b of buf5) {
 const buf6 = Buffer.from('tést', 'latin1');
 console.log(buf6[0]);
 
-console.log(buf5.toString('hex'));
+console.log('test:' + buf5.toString('hex', 1,3));
 console.log(buf6.toString('base64'));
 //------------------------------------
 const arr = new Uint16Array(2);
@@ -55,5 +55,5 @@ console.log(buf8);
 // 注意，修改这个新建的 Buffer 切片，也会同时修改原始的 Buffer 的内存，因为这两个对象所分配的内存是重叠的。
 
 // 转码
-const newBuf = buffer.transcode(Buffer.from('€'), 'utf8', 'ascii');
 const buffer = require('buffer');
+const newBuf = buffer.transcode(Buffer.from('€'), 'utf8', 'ascii');
