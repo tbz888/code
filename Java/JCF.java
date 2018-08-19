@@ -29,5 +29,6 @@ public class JCF{
 		for (int x : list2){
 			System.out.println(x);
 		}
+
 	}
 }
