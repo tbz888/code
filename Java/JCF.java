@@ -2,6 +2,8 @@ import java.util.*;
 
 public class JCF{
 	public static void main(String[] args) {	
+		long beginTime = System.currentTimeMillis();
+
 		//visit a list with iterator
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(new String("Monday")); // push_back
@@ -30,5 +32,6 @@ public class JCF{
 			System.out.println(x);
 		}
 
+		System.out.println("Run Time: " + (System.currentTimeMillis() - beginTime));
 	}
 }
