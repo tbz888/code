@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class JCF{
+public class testJCF{
 	public static void main(String[] args) {	
 		long beginTime = System.currentTimeMillis();
 
