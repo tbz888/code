@@ -7,7 +7,7 @@ import java.util.*;
  Strings are constant; their values cannot be changed after they are created. 
  String buffers support mutable strings. Because String objects are immutable they can be shared.
  Instances of StringBuilder are not safe for use by multiple threads. If such synchronization is required then it is recommended that StringBuffer be used.
- String modification -> other String literal.
+ String modification 指向 other String literal.
 */
 
 /**  frequently used methods:
