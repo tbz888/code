@@ -24,7 +24,6 @@ import java.util.*;
 -compareTo
 -format
 -equals(@override)
--charAt/codePointAt
 -startsWith/endsWith
 -join
 */
@@ -38,6 +37,8 @@ public class testString {
 
 		// String str = new String("test");
 		String str = "test_better";
+		System.out.println(str.length());
+		System.out.println(str.codePointCount(0, str.length()));
 		System.out.println(str.substring(4, 8));
 
 		String space = "   tbz 1  ";
