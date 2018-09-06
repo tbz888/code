@@ -1,3 +1,12 @@
+class MyHandler implements Thread.UncaughtExceptionHandler {
+	@Override
+	public void uncaughtException(Thread t, Throwable e) {
+		System.out.println("[ERROR_LOG]: ");
+		System.out.println(t.toString());
+		e.printStackTrace();
+	}
+}
+
 class Job implements Runnable {  // user's thread(No.2)
 	@Override
 	public void run() {
@@ -13,6 +22,8 @@ class Job implements Runnable {  // user's thread(No.2)
 				break;
 			}
 		}
+		// System.out.println(1/0); // make checked exception
+		throw new RuntimeException("testHandler");
 	}
 }
 
@@ -48,6 +59,7 @@ public class testThread {
 	public static void main(String[] args) {  // default thread(No.1)
 		System.out.println("Main_Begin: " + Thread.currentThread().toString() + Thread.currentThread().getState());
 		Thread r = new Thread(new Job()); // NEW
+		r.setUncaughtExceptionHandler(new MyHandler()); // bind checked exception handler
 		System.out.println(r.toString() + r.getState()); 
 		r.start(); // RUNNABLE
 		Thread.currentThread().yield(); // give up
