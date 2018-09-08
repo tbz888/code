@@ -41,23 +41,23 @@ class Transfer implements Runnable {
 class SumInfo implements Runnable {
 	@Override
 	public void run() {
-		while (true) {
-			synchronized (testSynchronized.accountLock) {
-				int sum = 0;
-				for (Integer x : testSynchronized.account) {
-					sum += x;
-					System.out.print(x + " | ");
+		try {
+			while (true) {
+				synchronized (testSynchronized.accountLock) {
+					int sum = 0;
+					for (Integer x : testSynchronized.account) {
+						sum += x;
+						System.out.print(x + " | ");
+					}
+					System.out.println("SUM :" + sum);
+					if (sum != 100000)
+						System.out.println("Error happened! ");
 				}
-				System.out.println("SUM :" + sum);
-				if (sum != 100000)
-					System.out.println("Error happened! ");
-			}
-			try {
 				Thread.sleep(1000);
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

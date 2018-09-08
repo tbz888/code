@@ -82,46 +82,44 @@ class HandlerPool {
 	}
 
 	public synchronized void setAll() {
-		while (queue.size() == 0 || isAllChecked())
-		{
-			try {
+		try {
+			while (queue.size() == 0 || isAllChecked()) {
 				this.wait();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-		}
-		System.out.println("setAll_start:");
-		for (Handler h : HandlerPool.getInstance().queue)
-		{
-			if (h.getChecked() == false) {
-				h.setHandler(h.getHandler() + " x " + h.getHandler() + " = ?");
-				h.setChecked();
+			System.out.println("setAll_start:");
+			for (Handler h : HandlerPool.getInstance().queue) {
+				if (h.getChecked() == false) {
+					h.setHandler(h.getHandler() + " x " + h.getHandler() + " = ?");
+					h.setChecked();
+				}
 			}
+			System.out.println("setAll_end:");
+			this.notifyAll();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println("setAll_end:");
-		this.notifyAll();
 	}
 
 	public synchronized String getAndRemove(Handler h) {
-		String ret = null;
-		if (h != null)
-		{
-			int toDel = queue.indexOf(h);
-			ret = queue.get(toDel).getHandler();
-			while (!ret.contains("x")) {	
-				try {
+		try {
+			String ret = null;
+			if (h != null)
+			{
+				int toDel = queue.indexOf(h);
+				while (toDel < 0 || !queue.get(toDel).getHandler().contains("x")) {	
 					this.wait();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				toDel = queue.indexOf(h);
-				ret = queue.get(toDel).getHandler();
-			} 
-			System.out.println("getRemove_start:" + h.getHandler());
-			queue.remove(toDel);
+					toDel = queue.indexOf(h);
+					ret = queue.get(toDel).getHandler();
+				} 
+				System.out.println("getRemove_start:" + h.getHandler());
+				queue.remove(toDel);
+			}
+			System.out.println("getRemove_end:" + h.getHandler());
+			return ret;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		System.out.println("getRemove_end:" + h.getHandler());
-		return ret;
 	}
 }
 

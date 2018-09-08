@@ -10,17 +10,16 @@ class MyHandler implements Thread.UncaughtExceptionHandler {
 class Job implements Runnable {  // user's thread(No.2)
 	@Override
 	public void run() {
-		while (!Thread.currentThread().isInterrupted()) {
-			try {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
 				System.out.println("sleep.");
 				Thread.currentThread().sleep(1000); // TIMED_WAITING
 				System.out.println("wakeup.");
 			}
-			catch (Exception e) { // thread was interrupted during sleep or wait
-				e.printStackTrace();
-				System.out.println("Job interrupted.");
-				break;
-			}
+		}
+		catch (Exception e) { // thread was interrupted during sleep or wait
+			e.printStackTrace();
+			System.out.println("Job interrupted.");
 		}
 		// System.out.println(1/0); // make checked exception
 		throw new RuntimeException("testHandler");
@@ -67,18 +66,17 @@ public class testThread {
 		System.out.println("Main_End: " + Thread.currentThread().toString() + Thread.currentThread().getState() + "\n");
 
 		int times = 0;
-		while (!r.getState().toString().equals("TERMINATED"))
-		{
-			try {
+		try {
+			while (!r.getState().toString().equals("TERMINATED")) {
 				Thread.sleep(600);
+				++times;
+				if (times > 15)
+					r.interrupt();
+				System.out.println("::Job_state: " + r.toString() + r.getState()); 
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			++times;
-			if (times > 15)
-				r.interrupt();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("::Job_state: " + r.toString() + r.getState()); 
 		}
 
