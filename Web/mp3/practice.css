@@ -1,8 +1,0 @@
-.box {
-    float: left;
-    width: 50%;     /* ratio compared with parent */
-}
-
-p {
-    text-indent: 2em;
-}
